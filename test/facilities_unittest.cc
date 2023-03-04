@@ -68,8 +68,8 @@ TEST(facilities_unittest, async_request)
 	req.set_method(HttpMethodGet);
 	req.set_http_version("HTTP/1.1");
 	req.set_request_uri("/");
-	req.set_header_pair("Host", "www.sogou.com");
-	auto res = WFFacilities::request<protocol::HttpRequest, protocol::HttpResponse>(TT_TCP_SSL, "https://www.sogou.com", std::move(req), 0);
+	req.set_header_pair("Host", "www.techweb.com.cn");
+	auto res = WFFacilities::request<protocol::HttpRequest, protocol::HttpResponse>(TT_TCP, "http://www.techweb.com.cn", std::move(req), 0);
 	//EXPECT_EQ(res.task_state, WFT_STATE_SUCCESS);
 	if (res.task_state == WFT_STATE_SUCCESS)
 	{
@@ -114,14 +114,3 @@ TEST(facilities_unittest, WaitGroup)
 	wg3.wait();
 }
 
-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
-
-#include <openssl/ssl.h>
-int main(int argc, char* argv[])
-{
-	OPENSSL_init_ssl(0, 0);
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
-}
-
-#endif

@@ -78,12 +78,6 @@ protected:
 	{
 		SeriesWork *series = series_of(this);
 
-		if (this->state == WFT_STATE_SYS_ERROR && this->error < 0)
-		{
-			this->state = WFT_STATE_SSL_ERROR;
-			this->error = -this->error;
-		}
-
 		if (this->callback)
 			this->callback(this);
 
@@ -154,12 +148,6 @@ protected:
 	virtual SubTask *done()
 	{
 		SeriesWork *series = series_of(this);
-
-		if (this->state == WFT_STATE_SYS_ERROR && this->error < 0)
-		{
-			this->state = WFT_STATE_SSL_ERROR;
-			this->error = -this->error;
-		}
 
 		if (this->callback)
 			this->callback(this);

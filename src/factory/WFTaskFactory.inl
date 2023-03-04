@@ -222,7 +222,6 @@ void WFComplexClientTask<REQ, RESP, CTX>::init(TransportType type,
 
 	type_ = type;
 	info_.assign(info);
-	params.use_tls_sni = false;
 	if (WFGlobal::get_route_manager()->get(type, &addrinfo, info_, &params,
 										   "", route_result_) < 0)
 	{
@@ -379,12 +378,6 @@ void WFComplexClientTask<REQ, RESP, CTX>::switch_callback(void *t)
 {
 	if (!redirect_)
 	{
-		if (this->state == WFT_STATE_SYS_ERROR && this->error < 0)
-		{
-			this->state = WFT_STATE_SSL_ERROR;
-			this->error = -this->error;
-		}
-
 		if (tracing_.deleter)
 		{
 			tracing_.deleter(tracing_.data);
