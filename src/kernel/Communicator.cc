@@ -94,7 +94,7 @@ static int __bind_and_listen(int sockfd, const struct sockaddr *addr,
 			return -1;
 	}
 
-	return listen(sockfd, SOMAXCONN);
+	return listen(sockfd, SOMAXCONN < 4096 ? 4096 : SOMAXCONN);
 }
 
 int CommTarget::init(const struct sockaddr *addr, socklen_t addrlen,
