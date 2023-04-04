@@ -826,7 +826,7 @@ public:
 		callback(std::move(cb))
 	{
 		this->first = first;
-		this->set_in_parallel();
+		this->set_in_parallel(this);
 		this->user_data = NULL;
 	}
 
