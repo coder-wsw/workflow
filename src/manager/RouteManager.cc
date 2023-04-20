@@ -460,7 +460,7 @@ int RouteManager::get(TransportType type,
 	{
 		struct RouteParams params = {
 			.transport_type			=	type,
-			.addrinfo 				= 	addrinfo,
+			.addrinfo 				=	addrinfo,
 			.key					=	key,
 			.max_connections		=	(unsigned int)ep_params->max_connections,
 			.connect_timeout		=	ep_params->connect_timeout,
