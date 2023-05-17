@@ -38,7 +38,6 @@ cc_library(
 cc_library(
 	name = 'common',
 	srcs = [
-		'src/algorithm/DnsRoutine.cc',
 		'src/client/WFDnsClient.cc',
 		'src/factory/DnsTaskImpl.cc',
 		'src/factory/FileTaskImpl.cc',
