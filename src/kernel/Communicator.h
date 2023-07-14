@@ -49,6 +49,8 @@ public:
 		*addrlen = this->addrlen;
 	}
 
+	int has_idle_conn() const { return !list_empty(&this->idle_list); }
+
 private:
 	virtual int create_connect_fd()
 	{
@@ -61,7 +63,7 @@ private:
 	}
 
 public:
-	virtual void release(int keep_alive) { }
+	virtual void release() { }
 
 private:
 	struct sockaddr *addr;

@@ -54,7 +54,7 @@ public:
 
 private:
 	virtual CommTarget *acquire(int wait_timeout); /* final */
-	virtual void release(int keep_alive); /* final */
+	virtual void release(); /* final */
 
 private:
 	CommSchedGroup *group;
@@ -117,7 +117,7 @@ public:
 		{
 			ret = this->comm.request(session, *target);
 			if (ret < 0)
-				(*target)->release(0);
+				(*target)->release();
 		}
 
 		return ret;
