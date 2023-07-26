@@ -9,6 +9,7 @@ set(SRC
 	http_parser.c
 	HttpMessage.cc
 	HttpUtil.cc
+	TLVMessage.cc
 )
 
 if (NOT MYSQL STREQUAL "n")
