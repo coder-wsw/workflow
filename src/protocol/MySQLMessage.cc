@@ -399,7 +399,6 @@ int MySQLAuthResponse::decode_packet(const unsigned char *buf, size_t buflen)
 	const unsigned char *pos;
 	const unsigned char *str;
 	unsigned long long len;
-	int ret;
 
 	if (end == buf)
 		return -2;
@@ -431,11 +430,7 @@ int MySQLAuthResponse::decode_packet(const unsigned char *buf, size_t buflen)
 
 	default:
 		pos = buf;
-		ret = decode_string(&str, &len, &pos, end);
-		if (ret <= 0)
-			return ret;
-
-		if (len == 1)
+		if (decode_string(&str, &len, &pos, end) > 0 && len == 1)
 		{
 			if (*str == 0x03)
 			{
