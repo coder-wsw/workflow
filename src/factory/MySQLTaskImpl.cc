@@ -194,6 +194,7 @@ CommMessageOut *ComplexMySQLTask::message_out()
 			 * the target was reconnected. */
 			if (target->state)
 			{
+				is_user_request_ = true;
 				errno = ECONNRESET;
 				return NULL;
 			}
