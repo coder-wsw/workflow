@@ -197,7 +197,6 @@ std::string MySQLRequest::get_query() const
 #define MYSQL_CAPFLAG_CLIENT_PS_MULTI_RESULTS	0x00040000
 #define MYSQL_CAPFLAG_CLIENT_PLUGIN_AUTH		0x00080000
 #define MYSQL_CAPFLAG_CLIENT_LOCAL_FILES		0x00000080
-#define MYSQL_CAPFLAG_CLIENT_SESSION_TRACK		(1 << 23)
 
 int MySQLHandshakeResponse::encode(struct iovec vectors[], int max)
 {
@@ -343,8 +342,7 @@ int MySQLAuthRequest::encode(struct iovec vectors[], int max)
 				   MYSQL_CAPFLAG_CLIENT_LOCAL_FILES |
 				   MYSQL_CAPFLAG_CLIENT_MULTI_STATEMENTS |
 				   MYSQL_CAPFLAG_CLIENT_PS_MULTI_RESULTS |
-				   MYSQL_CAPFLAG_CLIENT_PLUGIN_AUTH |
-				   MYSQL_CAPFLAG_CLIENT_SESSION_TRACK);
+				   MYSQL_CAPFLAG_CLIENT_PLUGIN_AUTH);
 	pos += 4;
 	int4store(pos, 0);
 	pos += 4;
