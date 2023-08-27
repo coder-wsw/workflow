@@ -207,15 +207,11 @@ static int parse_ok_packet(const void *buf, size_t len, mysql_parser_t *parser)
 		if (decode_string(&str, &info_len, &p, buf_end) == 0)
 			return -2;
 
-		if (p != buf_end)
+		if (server_status & MYSQL_SERVER_SESSION_STATE_CHANGED)
 		{
-			if (server_status & MYSQL_SERVER_SESSION_STATE_CHANGED)
-			{
-				const unsigned char *tmp_str;
-				unsigned long long tmp_len;
-				if (decode_string(&tmp_str, &tmp_len, &p, buf_end) == 0)
-					return -2;
-			} else
+			const unsigned char *tmp_str;
+			unsigned long long tmp_len;
+			if (decode_string(&tmp_str, &tmp_len, &p, buf_end) == 0)
 				return -2;
 		}
 	} else {

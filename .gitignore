@@ -30,3 +30,19 @@
 *.exe
 *.out
 *.app
+
+# _include
+_include
+
+# _lib
+_lib
+
+# build
+build
+
+# .vscode
+.vscode
+
+# .cmake
+workflow-config.cmake
+

@@ -99,12 +99,11 @@ void wget_callback(WFHttpTask *task)
 	fprintf(stderr, "\nSuccess. Press Ctrl-C to exit.\n");
 }
 
-void sig_handler(int signo) { }
+void sig_handler(int signo) { fprintf(stderr, "signal %d\n", signo); }
 
 int main(int argc, char *argv[])
 {
 	WFHttpTask *task;
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: %s <http URL>\n", argv[0]);
@@ -114,6 +113,7 @@ int main(int argc, char *argv[])
 	signal(SIGINT, sig_handler);
 
 	std::string url = argv[1];
+	fprintf(stdout, "URL: %s\n", url.c_str());
 	if (strncasecmp(argv[1], "http://", 7) != 0 &&
 		strncasecmp(argv[1], "https://", 8) != 0)
 	{

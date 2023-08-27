@@ -6,6 +6,9 @@ project(tutorial
 		LANGUAGES C CXX
 )
 
+SET(CMAKE_TOOLCHAIN_FILE "E:/DockerRepo/vcpkg/scripts/buildsystems/vcpkg.cmake")
+set(CMAKE_PREFIX_PATH "E:/DockerRepo/vcpkg/installed/x64-windows" )
+
 if (WIN32)
 	option(WORKFLOW_TUTORIAL_BUILD_STATIC_RUNTIME "Use static runtime" ON)
 endif ()
@@ -17,6 +20,8 @@ find_package(OpenSSL REQUIRED)
 find_package(workflow REQUIRED CONFIG HINTS ..)
 include_directories(${OPENSSL_INCLUDE_DIR} ${WORKFLOW_INCLUDE_DIR})
 link_directories(${WORKFLOW_LIB_DIR})
+find_package(Spdlog REQUIRED)
+include_directories(${SPDLOG_INCLUDE_DIR})
 
 if (WIN32)
 	if (WORKFLOW_TUTORIAL_BUILD_STATIC_RUNTIME)
@@ -69,7 +74,7 @@ foreach(src ${TUTORIAL_LIST})
 	string(REPLACE "-" ";" arr ${src})
 	list(GET arr -1 bin_name)
 	add_executable(${bin_name} ${src}.cc)
-	target_link_libraries(${bin_name} ${WORKFLOW_LIB})
+	target_link_libraries(${bin_name} ${WORKFLOW_LIB} ${SPDLOG_LIBRARIES})
 	if (WIN32)
 		target_compile_definitions(
 			${bin_name} PRIVATE
@@ -112,3 +117,4 @@ set_target_properties(server PROPERTIES
 set_target_properties(client PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/${DIR10})
 
+add_compile_options(/D_CRT_SECURE_NO_WARNINGS)

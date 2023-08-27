@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 
 find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE_DIR} ${INC_DIR}/workflow)
+find_package(Spdlog REQUIRED)
+include_directories(${SPDLOG_INCLUDE_DIR})
 
 if (WIN32)
 	add_subdirectory(kernel_win)
@@ -39,6 +41,7 @@ add_library(
 )
 
 #target_link_libraries(${LIB_SHARED} ws2_32 wsock32 OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(${PROJECT_NAME} spdlog::spdlog)
 #if (NOT WIN32)
 
 if (KAFKA STREQUAL "y")

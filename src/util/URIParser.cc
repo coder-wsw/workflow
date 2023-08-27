@@ -25,6 +25,7 @@
 #include <map>
 #include "StringUtil.h"
 #include "URIParser.h"
+#include <spdlog/spdlog.h>
 
 enum
 {
@@ -285,6 +286,8 @@ int URIParser::parse(const char *str, ParsedURI& uri)
 	{
 		for (; ; i++)
 		{
+			SPDLOG_INFO("str[{}]:{},{}", i,str[i],(unsigned char)str[i]);
+			SPDLOG_INFO("authority_map[{}]:{}",i,authority_map[(unsigned char)str[i]]);
 			switch (authority_map[(unsigned char)str[i]])
 			{
 				case 0:
@@ -416,6 +419,7 @@ int URIParser::parse(const char *str, ParsedURI& uri)
 			free(*dst[i]);
 			*dst[i] = NULL;
 		}
+		SPDLOG_INFO("dst[{}]:{}",i,*dst[i]);
 	}
 
 	uri.state = URI_STATE_SUCCESS;

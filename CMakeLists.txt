@@ -9,6 +9,10 @@ project(
 	LANGUAGES C CXX
 )
 
+SET(CMAKE_TOOLCHAIN_FILE "E:/DockerRepo/vcpkg/scripts/buildsystems/vcpkg.cmake")
+set(CMAKE_PREFIX_PATH "E:/DockerRepo/vcpkg/installed/x64-windows" )
+# set(VCPKG_TARGET_TRIPLET "x64-windows-static")
+
 if (CYGWIN)
 	message(FATAL_ERROR "Sorry, DO NOT support Cygwin")
 endif ()
@@ -96,7 +100,8 @@ else ()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fPIC -pipe -std=c++11 -fno-exceptions -Wno-invalid-offsetof")
 endif ()
 
-add_subdirectory(src)
+# add_subdirectory(src)
+add_subdirectory(tutorial)
 
 ####CONFIG
 
